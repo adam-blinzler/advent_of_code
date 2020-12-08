@@ -12,27 +12,31 @@ def action(op):
 
 
 def attempt_program(lines):
+    # returns false if no errors
     visit = [0]*len(lines)
     current_line = 0
-    prev_line = 0
     accum = 0
-    while True:
-        if current_line >= len(lines):
-            print("")
-            print("programe finished")
-            print("    last accummulator value = ", accum)
-            return False
-        elif visit[current_line]:
-            print("programe failed with infinite loop")
+    while current_line < len(lines):
+        if visit[current_line]:
+            print("program failed with infinite loop")
             print("    last accummulator value = ", accum)
             return visit
 
         acc_add, mv_line = action(lines[current_line])
         visit[current_line] = 1
         accum += acc_add
-        prev_line = current_line
         current_line += mv_line
-        
+
+        if current_line < 0:
+            print("program error, next instruction less than 0")
+            print("    last accummulator value = ", accum)
+            return visit
+
+    print("")
+    print("programe finished")
+    print("    last accummulator value = ", accum)
+    return False
+
 ###################33
 with open("input.txt") as fl:
     lines = fl.readlines()

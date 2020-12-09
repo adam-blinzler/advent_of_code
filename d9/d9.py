@@ -14,9 +14,9 @@ for i in range(rolling, len(all_nums)):
         print("1) Number not a sum of the previous - ", all_nums[i])
         break
 
-for j in range(i-1):
+for j in range(i-1,0,-1):
     cont = list()
-    for k in range(j,i-1):
+    for k in range(j,0,-1):
         cont.append(all_nums[k])
         sum_cont = sum(cont)
         if sum_cont == all_nums[i]:

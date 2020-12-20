@@ -51,11 +51,13 @@ def main():
                 active.append([x,y,0,0])   
 
     for i in range(rounds):
-        sus_point = list()
+        sus_points = list()
         for point in active:
             for delta in neighbor_offset():
-                sus_point.append(get_new_point(point,delta))
-        out = run_multiprocessing(check_point, active, sus_point, n_processors)
+                p = get_new_point(point,delta)
+                if not p in sus_points:
+                    sus_points.append(p)
+        out = run_multiprocessing(check_point, active, sus_points, n_processors)
 
         active = list()
         for x in out:

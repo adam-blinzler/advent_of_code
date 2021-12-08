@@ -23,12 +23,15 @@ def part2_cost(crab_pos, c_mean):
 def find_crab_mean(crab_file):
     crab_pos = get_crab_list(crab_file)
     c_means = [math.floor(statistics.mean(crab_pos)), math.ceil(statistics.mean(crab_pos))]
+    costs = [part2_cost(crab_pos,c_means[0]),part2_cost(crab_pos,c_means[1])]
+    if costs[0] < costs[1]:
+        sol = 0
+    else:
+        sol = 1
+    print("Best location {}".format(c_means[sol]))
 
-    crab_cost = min([part2_cost(crab_pos,c) for c in c_means])
-    #print("Best location {}".format())
-
-    print("  Cost to move is {}".format(crab_cost))
-    return crab_cost
+    print("  Cost to move is {}".format(costs[sol]))
+    return costs[sol]
 
 
 print("-- Part 1")
